@@ -219,3 +219,9 @@ Feel free to fork, modify, and improve this project!
 - [ ] Leaderboard rankings
 - [ ] Custom questions
 - [ ] Tournament mode
+
+## Deployment
+
+bun run deploy - deploy's changes to github pages
+
+go to render.com, deploy changes for the server

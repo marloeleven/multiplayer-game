@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 export const MAX_ANSWER = parseInt(process.env.MAX_ANSWER ?? '100', 10);
 export const ROUNDS_PER_GAME = parseInt(process.env.ROUNDS_PER_GAME || '5', 10);
 export const COUNTDOWN_SECONDS = parseInt(

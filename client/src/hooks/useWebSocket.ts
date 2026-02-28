@@ -23,7 +23,9 @@ export function useWebSocket() {
     const ip = searchParams.get('ip');
     const hostname = ip ?? HOSTNAME ?? window.location.hostname;
 
-    const wsUrl = `${PROTOCOL}://${hostname}:${PORT}`;
+    const port = process.env.NODE_ENV === 'production' ? '' : `:${PORT}`;
+
+    const wsUrl = `${PROTOCOL}://${hostname}${port}`;
 
     ws.current = new WebSocket(wsUrl);
 

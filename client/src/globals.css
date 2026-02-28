@@ -143,10 +143,12 @@
     opacity: 1;
   }
   100% {
-    opacity: 0.2;
+    opacity: var(--blink-opacity);
   } /* or 0 for complete disappear */
 }
 
 @utility animate-progressbar {
-  animation: progessbar var(--duration) linear forwards;
+  animation:
+    progessbar var(--progress-duration) linear forwards,
+    blink var(--blink-duration) linear infinite;
 }

@@ -24,7 +24,9 @@ export function TimerProgressBar({
   const percentage = Math.max(0, Math.min(100, (current / base) * 100));
 
   const style: Record<string, string> = {
-    '--duration': `${base}s`,
+    '--progress-duration': `${base}s`,
+    '--blink-duration': `300ms`,
+    '--blink-opacity': percentage > 40 ? '1' : `0.3`,
   };
 
   return (

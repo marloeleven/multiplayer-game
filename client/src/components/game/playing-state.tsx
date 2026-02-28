@@ -1,5 +1,5 @@
 import { useCountdown } from '@/hooks/useCountdown';
-import { cn, once } from '@/lib/utils';
+import { autoFocus, cn, once } from '@/lib/utils';
 import { ANSWER_TIME_LIMIT, MAX_ANSWER } from '@root/const/config';
 import { FormEvent, useEffect, useRef } from 'react';
 import { useGame } from '../game-context';
@@ -56,7 +56,8 @@ export function PlayingState() {
       <form onSubmit={onSubmit}>
         <div className="space-y-3">
           <Input
-            type="text"
+            ref={autoFocus}
+            type="number"
             name="answer"
             placeholder="Enter your answer"
             disabled={hasAnswer}

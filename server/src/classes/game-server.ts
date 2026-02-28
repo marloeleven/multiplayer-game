@@ -64,7 +64,7 @@ export class GameServer {
       );
     });
 
-    server.listen(PORT, '0.0.0.0', () => {
+    server.listen(PORT, () => {
       console.log(`🎮 Math Fast server is running on http://0.0.0.0:${PORT}`);
       console.log(`📡 WebSocket server ready on ws://0.0.0.0:${PORT}`);
       console.log(`💡 Open Next.js client on http://localhost:3000`);

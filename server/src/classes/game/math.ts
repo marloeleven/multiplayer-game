@@ -5,8 +5,9 @@ import {
   ROUNDS_PER_GAME,
 } from '@root/const/config';
 import { GAME_EVENT } from '@root/const/game';
-import { EventMessage, WSWebSocket } from '@root/const/type';
+import { EventMessage } from '@root/const/type';
 import { Player } from '../player';
+import { WSWebSocket } from '../types';
 import { GameBase } from './game-base';
 
 interface PlayerData {

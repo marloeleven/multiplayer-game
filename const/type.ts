@@ -1,7 +1,5 @@
 import { GAME_EVENT } from './game';
 
-export type { WebSocket as WSWebSocket } from 'ws';
-
 type WSEvent<T, Payload = undefined> = {
   type: T;
   payload?: Payload;

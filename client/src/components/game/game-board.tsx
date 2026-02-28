@@ -1,7 +1,7 @@
 'use client';
 
 import { COUNTDOWN_SECONDS } from '@root/const/config';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { FloatingDebugger } from '../floating-debugger';
 import { GAME_STATUS, GameState, useGame } from '../game-context';
 import PlayersList from '../players-list';
@@ -22,21 +22,23 @@ export function GameBoard() {
   return (
     <div className="w-full max-w-4xl">
       <div className="bg-white rounded-lg shadow-xl overflow-hidden">
-        <FloatingDebugger>
-          {JSON.stringify(
-            {
-              status: state.status,
-              countdown,
-              round: state.roundNumber,
-              correctAnswer: state.correctAnswer,
-            },
-            null,
-            2,
-          )}
+        <Suspense fallback="Loading...">
+          <FloatingDebugger>
+            {JSON.stringify(
+              {
+                status: state.status,
+                countdown,
+                round: state.roundNumber,
+                correctAnswer: state.correctAnswer,
+              },
+              null,
+              2,
+            )}
 
-          <br />
-          {JSON.stringify(state.currentPlayer, null, 2)}
-        </FloatingDebugger>
+            <br />
+            {JSON.stringify(state.currentPlayer, null, 2)}
+          </FloatingDebugger>
+        </Suspense>
         {/* Header */}
         <GameHeaders setCountdown={setCountdown} status={state.status} />
 

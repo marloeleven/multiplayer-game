@@ -1,4 +1,5 @@
-import { EventMessage, WSWebSocket } from '@root/const/type';
+import { EventMessage } from '@root/const/type';
+import { WSWebSocket } from '../types';
 
 export class GameBase {
   clients = new Map<string, WSWebSocket>();

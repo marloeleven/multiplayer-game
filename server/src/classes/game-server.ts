@@ -4,9 +4,9 @@ import { WebSocketServer } from 'ws';
 
 import { PORT } from '@root/const/config';
 import { GAME_EVENT } from '@root/const/game';
-import { WSWebSocket } from '@root/const/type';
 import { MathGame } from './game/math';
 import { Player } from './player';
+import { WSWebSocket } from './types';
 
 const app = express();
 app.use(express.json());

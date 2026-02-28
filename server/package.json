@@ -1,0 +1,22 @@
+{
+  "name": "math-fast-server",
+  "version": "1.0.0",
+  "description": "WebSocket server for math-fast game",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "node index.ts",
+    "dev": "bun run index.ts --watch"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.6",
+    "@types/ws": "^8.18.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "ts-node": "^10.9.2",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

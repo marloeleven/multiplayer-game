@@ -2,9 +2,10 @@
 
 import { cn } from '@/lib/utils';
 
-import { Switch } from '@/components/ui/switch';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { GAME_STATUS, useGame } from './game-context';
+import { Checkbox } from './ui/checkbox';
 
 export default function PlayersList() {
   const { state } = useGame();
@@ -26,7 +27,14 @@ export default function PlayersList() {
       <h3 className="text-lg font-bold text-gray-900 mb-4 flex justify-between">
         <span>👥 Players ({state.players.size})</span>
 
-        <Switch onCheckedChange={setHide} defaultChecked={hide} />
+        <label className="flex items-center gap-2 cursor-pointer">
+          {hide ? <EyeOffIcon /> : <EyeIcon />}
+          <Checkbox
+            className="hidden"
+            onCheckedChange={(value) => setHide(!!value)}
+            defaultChecked={hide}
+          />
+        </label>
       </h3>
 
       {!state.players.size ? (
@@ -56,7 +64,7 @@ export default function PlayersList() {
                 )}
               >
                 <div className="flex items-center gap-3 flex-1 min-w-0">
-                  <span className="text-lg font-semibold text-gray-700 flex-shrink-0">
+                  <span className="text-lg font-semibold text-gray-700 shrink-0">
                     #{index + 1}
                   </span>
                   <div className="min-w-0">
@@ -66,7 +74,7 @@ export default function PlayersList() {
                     </p>
                   </div>
                 </div>
-                <div className="text-right flex-shrink-0 ml-2">
+                <div className="text-right shrink-0 ml-2">
                   <p className="text-lg font-bold text-gray-900">{score}</p>
                   <p className="text-xs text-gray-500">pts</p>
                 </div>

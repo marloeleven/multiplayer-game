@@ -7,6 +7,7 @@ import { GAME_STATUS, GameState, useGame } from '../game-context';
 import PlayersList from '../players-list';
 import { GameFinishState } from './game-finish-state';
 import { GameHeaders } from './headers';
+import { PlayingCountdown } from './playing-countdown';
 import { PlayingState } from './playing-state';
 import RoundResults from './round-results';
 import { WaitingReadyState } from './waiting-ready-state';
@@ -44,18 +45,6 @@ export function GameBoard() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left: Question and Answer */}
             <div className="lg:col-span-2">
-              {isPlaying && !!countdown && (
-                <div className="text-center py-12">
-                  <p className="text-6xl font-bold text-blue-600 animate-pulse">
-                    {countdown}
-                  </p>
-                  <p className="text-xl text-gray-600 mt-4">
-                    Game starting in {countdown} second
-                    {countdown !== 1 ? 's' : ''}...
-                  </p>
-                </div>
-              )}
-
               <Display
                 status={state.status}
                 isPlaying={isPlaying}
@@ -96,7 +85,11 @@ function Display({
   }
 
   if (isPlaying) {
-    return <PlayingState isCountingDown={!!countdown} />;
+    if (countdown) {
+      return <PlayingCountdown countdown={countdown} />;
+    }
+
+    return <PlayingState />;
   }
 
   return null;

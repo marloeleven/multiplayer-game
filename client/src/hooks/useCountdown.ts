@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-export function useCountdown(initialValue = 10) {
+export function useCountdown(initialValue = 10, onComplete = () => {}) {
   const [countdown, setCountdown] = useState(initialValue);
+  const intervalRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      console.log('interval');
+    intervalRef.current = setInterval(() => {
       setCountdown((prev) => {
         if (prev - 1 === 0) {
-          clearInterval(interval);
+          clearInterval(intervalRef.current);
+          onComplete();
           return 0;
         }
 
@@ -17,9 +18,15 @@ export function useCountdown(initialValue = 10) {
     }, 1000);
 
     return () => {
-      clearInterval(interval);
+      clearInterval(intervalRef.current);
     };
   }, []);
 
-  return countdown;
+  return {
+    countdown,
+    cancel: () => {
+      setCountdown(0);
+      clearInterval(intervalRef.current);
+    },
+  };
 }

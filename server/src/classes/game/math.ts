@@ -226,6 +226,7 @@ export class MathGame extends GameBase {
       this.status = GAME_STATUS.WAITING;
       if (this.roundNumber >= ROUNDS_PER_GAME) {
         this.status = GAME_STATUS.FINISH;
+
         this.broadcastGameState(answer);
 
         this.reset();

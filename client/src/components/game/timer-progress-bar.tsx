@@ -15,9 +15,11 @@ function getClassColor(percentage: number) {
 export function TimerProgressBar({
   current,
   base,
+  className,
 }: {
   current: number;
   base: number;
+  className?: string;
 }) {
   const percentage = Math.max(0, Math.min(100, (current / base) * 100));
 
@@ -31,6 +33,7 @@ export function TimerProgressBar({
         className={cn(
           'absolute inset-0 h-full will-change-transform animate-progressbar progress-bar-striped',
           getClassColor(percentage),
+          className,
         )}
         style={style}
       />

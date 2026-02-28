@@ -35,6 +35,7 @@ interface PlayerData {
 interface GameContext {
   state: {
     isConnected: boolean;
+    autoReady: boolean;
     id: string;
     name: string;
     players: Map<string, PlayerData>;
@@ -47,6 +48,7 @@ interface GameContext {
   joinGame: (name: string) => void;
   submitAnswer: (answer: string) => void;
   playerReady: () => void;
+  onAutoReadyChange: (autoReady: boolean) => void;
 }
 
 type EventMessage<T> = {
@@ -62,6 +64,7 @@ interface GameStatePayload {
 }
 
 export interface GameState extends Omit<GameStatePayload, 'players'> {
+  autoReady: boolean;
   id: string;
   name: string;
   correctAnswer: string;
@@ -71,6 +74,7 @@ export interface GameState extends Omit<GameStatePayload, 'players'> {
 
 const INITIAL_STATE: GameContext['state'] = {
   isConnected: false,
+  autoReady: false,
   id: '',
   name: '',
   status: GAME_STATUS.STARTING,
@@ -85,6 +89,7 @@ const INITIAL_STATE: GameContext['state'] = {
     isReady: false,
     name: '',
     score: 0,
+    addedScore: 0,
     time: 0,
   },
 };
@@ -94,10 +99,12 @@ const GameContext = createContext<GameContext>({
   joinGame: () => {},
   submitAnswer: () => {},
   playerReady: () => {},
+  onAutoReadyChange: () => {},
 });
 
 export function GameProvider({ children }: React.PropsWithChildren) {
   const [state, setState] = useState<GameState>({
+    autoReady: false,
     id: '',
     name: '',
     status: GAME_STATUS.STARTING,
@@ -112,6 +119,7 @@ export function GameProvider({ children }: React.PropsWithChildren) {
       isReady: false,
       name: '',
       score: 0,
+      addedScore: 0,
       time: 0,
     },
   });
@@ -175,6 +183,13 @@ export function GameProvider({ children }: React.PropsWithChildren) {
     });
   }, [send]);
 
+  const onAutoReadyChange = useCallback((autoReady: boolean) => {
+    setState((prev) => ({
+      ...prev,
+      autoReady,
+    }));
+  }, []);
+
   return (
     <GameContext.Provider
       value={{
@@ -186,6 +201,7 @@ export function GameProvider({ children }: React.PropsWithChildren) {
         joinGame: onJoin,
         submitAnswer,
         playerReady,
+        onAutoReadyChange,
       }}
     >
       {children}

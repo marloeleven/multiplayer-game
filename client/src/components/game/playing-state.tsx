@@ -1,17 +1,22 @@
 import { useCountdown } from '@/hooks/useCountdown';
-import { ANSWER_TIME_LIMIT } from '@root/const/config';
-import { FormEvent } from 'react';
+import { cn } from '@/lib/utils';
+import { ANSWER_TIME_LIMIT, MAX_ANSWER } from '@root/const/config';
+import { FormEvent, useEffect, useRef } from 'react';
 import { useGame } from '../game-context';
 import QuestionDisplay from '../question-display';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { TimerProgressBar } from './timer-progress-bar';
 
-export function PlayingState({ isCountingDown }: { isCountingDown: boolean }) {
+export function PlayingState() {
   const { state, submitAnswer } = useGame();
-  const countdown = useCountdown(ANSWER_TIME_LIMIT);
+  const hasAnswerRef = useRef(false);
 
-  console.log('@Debug: ', countdown);
+  const { countdown, cancel } = useCountdown(ANSWER_TIME_LIMIT, () => {
+    if (!hasAnswerRef.current) {
+      submitAnswer(String(MAX_ANSWER + 1));
+    }
+  });
 
   const hasAnswer = state.currentPlayer.hasAnswer;
 
@@ -24,31 +29,38 @@ export function PlayingState({ isCountingDown }: { isCountingDown: boolean }) {
 
     if (answer) {
       submitAnswer(answer);
+      cancel();
     }
   };
 
-  if (isCountingDown) {
-    return null;
-  }
+  useEffect(() => {
+    hasAnswerRef.current = state.currentPlayer.hasAnswer;
+  }, [state.currentPlayer.hasAnswer]);
 
   return (
     <div className="space-y-8 relative">
-      <TimerProgressBar current={countdown} base={ANSWER_TIME_LIMIT} />
+      <TimerProgressBar
+        current={countdown}
+        base={ANSWER_TIME_LIMIT}
+        className={cn({
+          invisible: !countdown,
+        })}
+      />
 
       <QuestionDisplay question={state.question} />
 
       <form onSubmit={onSubmit}>
         <div className="space-y-3">
           <Input
-            type="number"
+            type="text"
             name="answer"
             placeholder="Enter your answer"
-            disabled={isCountingDown || hasAnswer}
+            disabled={hasAnswer}
             className="text-lg p-4"
             autoFocus
           />
           <Button
-            disabled={isCountingDown || hasAnswer}
+            disabled={hasAnswer}
             className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 text-lg"
           >
             {hasAnswer ? '⏳ Submitted' : '✓ Submit Answer'}

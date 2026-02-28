@@ -54,6 +54,8 @@ function InitialState({
   return (
     <form
       onSubmit={(event) => {
+        event.preventDefault();
+
         const formData = new FormData(event.currentTarget);
         const name = formData.get('name') as string;
 

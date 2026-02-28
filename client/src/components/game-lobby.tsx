@@ -2,14 +2,20 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useCountdown } from '@/hooks/useCountdown';
+import { ANSWER_TIME_LIMIT } from '@root/const/config';
 import { useMemo, useState } from 'react';
 import { useGame } from './game-context';
+import { TimerProgressBar } from './game/timer-progress-bar';
 
 export function GameLobby() {
   const [loading, setLoading] = useState(false);
 
+  const countdown = useCountdown(ANSWER_TIME_LIMIT);
+
   return (
     <div className="w-full max-w-md">
+      <TimerProgressBar current={countdown} base={ANSWER_TIME_LIMIT} />
       <div className="bg-white rounded-lg shadow-xl p-8">
         <h1 className="text-4xl font-bold text-center mb-2 text-blue-600">
           ⚡ Math Fast

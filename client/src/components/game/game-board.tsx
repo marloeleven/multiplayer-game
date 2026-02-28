@@ -96,7 +96,7 @@ function Display({
   }
 
   if (isPlaying) {
-    return <PlayingState countdown={countdown} />;
+    return <PlayingState isCountingDown={!!countdown} />;
   }
 
   return null;

@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "bun run build && bun run gh-pages -d out"
+    "deploy": "bun run build && bun run gh-pages -d out --dotfiles"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.3.3",

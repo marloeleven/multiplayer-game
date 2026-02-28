@@ -7,8 +7,7 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useRef,
-  useState,
+  useState
 } from 'react';
 
 export const GAME_STATUS = {
@@ -126,42 +125,41 @@ export function GameProvider({ children }: React.PropsWithChildren) {
 
   const { isConnected, on, send, onJoin } = useWebSocket();
 
-  const isListeningState = useRef(false);
-
   useEffect(() => {
-    if (isListeningState.current) {
-      return;
-    }
-
-    isListeningState.current = true;
-
-    on(GAME_EVENT.GAME_CONNECTED, (data: EventMessage<{ id: string }>) => {
-      setState((prev) => ({
-        ...prev,
-        id: data.payload.id,
-      }));
-    });
-
-    on(GAME_EVENT.GAME_STATE, (data: EventMessage<GameStatePayload>) => {
-      console.log(JSON.stringify(data.payload, null, 2));
-      setState((prev) => {
-        const players = new Map(
-          data.payload.players.map((player) => [player.id, player]),
-        );
-
-        const currenPlayer = players.get(prev.id)!;
-
-        return {
+    const unsubscribeConnected = on(
+      GAME_EVENT.GAME_CONNECTED,
+      (data: EventMessage<{ id: string }>) => {
+        setState((prev) => ({
           ...prev,
-          ...data.payload,
-          players,
-          currenPlayer,
-        };
-      });
-    });
+          id: data.payload.id,
+        }));
+      },
+    );
+
+    const unsubscribeGameState = on(
+      GAME_EVENT.GAME_STATE,
+      (data: EventMessage<GameStatePayload>) => {
+        console.log(JSON.stringify(data.payload, null, 2));
+        setState((prev) => {
+          const players = new Map(
+            data.payload.players.map((player) => [player.id, player]),
+          );
+
+          const currenPlayer = players.get(prev.id)!;
+
+          return {
+            ...prev,
+            ...data.payload,
+            players,
+            currenPlayer,
+          };
+        });
+      },
+    );
 
     return () => {
-      isListeningState.current = false;
+      unsubscribeConnected();
+      unsubscribeGameState();
     };
   }, [on]);
 

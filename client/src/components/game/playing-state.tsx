@@ -1,5 +1,5 @@
 import { useCountdown } from '@/hooks/useCountdown';
-import { cn } from '@/lib/utils';
+import { cn, once } from '@/lib/utils';
 import { ANSWER_TIME_LIMIT, MAX_ANSWER } from '@root/const/config';
 import { FormEvent, useEffect, useRef } from 'react';
 import { useGame } from '../game-context';
@@ -12,11 +12,14 @@ export function PlayingState() {
   const { state, submitAnswer } = useGame();
   const hasAnswerRef = useRef(false);
 
-  const { countdown, cancel } = useCountdown(ANSWER_TIME_LIMIT, () => {
-    if (!hasAnswerRef.current) {
-      submitAnswer(String(MAX_ANSWER + 1));
-    }
-  });
+  const { countdown, cancel } = useCountdown(
+    ANSWER_TIME_LIMIT,
+    once(() => {
+      if (!hasAnswerRef.current) {
+        submitAnswer(String(MAX_ANSWER + 1));
+      }
+    }),
+  );
 
   const hasAnswer = state.currentPlayer.hasAnswer;
 
@@ -28,8 +31,9 @@ export function PlayingState() {
     const answer = (formData.get('answer') as string).trim();
 
     if (answer) {
-      submitAnswer(answer);
+      hasAnswerRef.current = true;
       cancel();
+      submitAnswer(answer);
     }
   };
 

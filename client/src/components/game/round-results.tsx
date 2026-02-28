@@ -103,27 +103,29 @@ export default function RoundResults() {
           </p>
 
           {!state.currentPlayer.isReady && (
-            <Button
-              onClick={playerReady}
-              className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2"
-            >
-              {state.autoReady
-                ? `Auto ready in ${countdown}s...`
-                : `I'm Ready!`}
-            </Button>
-          )}
+            <>
+              <Button
+                onClick={playerReady}
+                className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2"
+              >
+                {state.autoReady
+                  ? `Auto ready in ${countdown}s...`
+                  : `I'm Ready!`}
+              </Button>
 
-          <div
-            className={cn('flex gap-2 items-center justify-center mt-4', {
-              hidden: !countdown,
-            })}
-          >
-            <p>Toggle Auto ready:</p>
-            <Checkbox
-              onCheckedChange={onAutoReadyChange}
-              defaultChecked={state.autoReady}
-            />
-          </div>
+              <div
+                className={cn('flex gap-2 items-center justify-center mt-4', {
+                  hidden: !countdown,
+                })}
+              >
+                <p>Toggle Auto ready:</p>
+                <Checkbox
+                  onCheckedChange={onAutoReadyChange}
+                  defaultChecked={state.autoReady}
+                />
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>

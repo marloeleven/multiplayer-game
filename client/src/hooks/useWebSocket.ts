@@ -16,7 +16,6 @@ export function useWebSocket() {
   }, []);
 
   const onJoin = useCallback((name: string) => {
-    console.log('@Debug onJoin', name);
     const wsUrl =
       typeof window !== 'undefined'
         ? `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.hostname}:8080`

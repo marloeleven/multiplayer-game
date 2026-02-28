@@ -1,8 +1,10 @@
+const isProd = process.env.NODE_ENV === 'production'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: '/multiplayer-game',
-  assetPrefix: '/multiplayer-game/',
+  basePath: isProd ? '/multiplayer-game' : '',
+  assetPrefix: isProd ? '/multiplayer-game/' : '',
   trailingSlash: true,
   images: {
     unoptimized: true,

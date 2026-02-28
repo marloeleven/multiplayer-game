@@ -57,10 +57,8 @@ function InitialState({
         const formData = new FormData(event.currentTarget);
         const name = formData.get('name') as string;
 
-        if (name) {
-          joinGame(name);
-          setLoading(true);
-        }
+        joinGame(name || randomName);
+        setLoading(true);
       }}
     >
       <div className="space-y-4">
@@ -71,8 +69,7 @@ function InitialState({
           <Input
             name="name"
             type="text"
-            defaultValue={randomName}
-            placeholder="e.g., Cute"
+            placeholder={`Please enter your name or use: ${randomName}`}
             disabled={loading}
             className="w-full"
           />

@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useGame } from './game-context';
 
 export function GameLobby() {
@@ -46,10 +46,12 @@ function InitialState({
   setLoading: (_: boolean) => void;
 }) {
   const { joinGame } = useGame();
-  const randomName = useMemo(
-    () => `Anonymous-` + Math.ceil(Math.random() * 1000),
-    [],
-  );
+  const [randomName, setRandomName] = useState('');
+
+  // fix error on load issue
+  useEffect(() => {
+    setRandomName(`Anonymous-` + Math.ceil(Math.random() * 1000));
+  }, []);
 
   return (
     <form

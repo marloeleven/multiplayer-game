@@ -11,7 +11,7 @@ import { WSWebSocket } from './types';
 const app = express();
 app.use(express.json());
 const server = http.createServer(app);
-const wss = new WebSocketServer({ server });
+const wss = new WebSocketServer({ server, autoPong: true, port: PORT });
 
 const GAMES = {
   MATH: 'math',
@@ -65,9 +65,7 @@ export class GameServer {
     });
 
     server.listen(PORT, () => {
-      console.log(`🎮 Math Fast server is running on http://0.0.0.0:${PORT}`);
       console.log(`📡 WebSocket server ready on ws://0.0.0.0:${PORT}`);
-      console.log(`💡 Open Next.js client on http://localhost:3000`);
     });
   }
 }

@@ -11,4 +11,9 @@ export const ANSWER_TIME_LIMIT = parseInt(
 );
 export const BASE_POINT = parseInt(process.env.BASE_POINT || '5', 10);
 
-export const PORT = process.env.PORT || 8080;
+export const PORT = Number(process.env.PORT || 8080);
+
+export const PROTOCOL = process.env.PROTOCOL || 'wss';
+
+export const HOSTNAME =
+  process.env.HOSTNAME || 'multiplayer-game-gv7y.onrender.com';

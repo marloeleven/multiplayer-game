@@ -1,11 +1,14 @@
 import { GAME_EVENT } from '@root/const/game';
 import type { EventMessage } from '@root/const/type';
+import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export function useWebSocket() {
   const [isConnected, setIsConnected] = useState(false);
   const ws = useRef<WebSocket | null>(null);
   const messageHandlers = useRef<Map<string, Function[]>>(new Map());
+
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     return () => {
@@ -16,10 +19,10 @@ export function useWebSocket() {
   }, []);
 
   const onJoin = useCallback((name: string) => {
-    const wsUrl =
-      typeof window !== 'undefined'
-        ? `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.hostname}:8080`
-        : 'ws://localhost:8080';
+    const ip = searchParams.get('ip');
+    const hostname = ip ?? window.location.hostname;
+
+    const wsUrl = `ws://${hostname}:8080`;
 
     ws.current = new WebSocket(wsUrl);
 

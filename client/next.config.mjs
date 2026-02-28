@@ -4,9 +4,6 @@ const nextConfig = {
   basePath: '/multiplayer-game',
   assetPrefix: '/multiplayer-game/',
   trailingSlash: true,
-  images: {
-    unoptimized: true,
-  },
 }
 
 export default nextConfig

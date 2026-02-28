@@ -7,7 +7,7 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useState
+  useState,
 } from 'react';
 
 export const GAME_STATUS = {
@@ -139,7 +139,11 @@ export function GameProvider({ children }: React.PropsWithChildren) {
     const unsubscribeGameState = on(
       GAME_EVENT.GAME_STATE,
       (data: EventMessage<GameStatePayload>) => {
-        console.log(JSON.stringify(data.payload, null, 2));
+        const debugOn = window.location.search.includes('debug');
+
+        if (debugOn) {
+          console.log(JSON.stringify(data.payload, null, 2));
+        }
         setState((prev) => {
           const players = new Map(
             data.payload.players.map((player) => [player.id, player]),

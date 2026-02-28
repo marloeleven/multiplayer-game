@@ -82,7 +82,7 @@ function InitialState({
         <div className="text-sm text-gray-600 bg-blue-50 p-3 rounded">
           <p>
             <strong>How to play:</strong> Enter a name and join the game. Share
-            the the link with your friends and play together!
+            the link with your friends and play together!
           </p>
         </div>
 

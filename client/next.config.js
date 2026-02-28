@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  output: 'export',
+  basePath: '/math-fast',
+  assetPrefix: '/math-fast/',
+  images: {
+    unoptimized: true,
+  },
 }
 
-module.exports = nextConfig
+export default nextConfig

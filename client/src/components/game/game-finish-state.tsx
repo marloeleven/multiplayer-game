@@ -49,6 +49,7 @@ export function GameFinishState() {
             onClick={playerReady}
             className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2"
             size="lg"
+            autoFocus
           >
             Play Again
           </Button>

@@ -189,21 +189,18 @@ export class MathGame extends GameBase {
 
   private updateScore() {
     this.playersState
+      .filter((player) => Number(player.currentAnswer) === this.question.answer)
       .sort((a, b) => a.time - b.time)
       .forEach((player, rank) => {
-        const isCorrect = Number(player.currentAnswer) === this.question.answer;
+        const bonusPoints = this.getBonusPoint(
+          Math.floor((player.time - this.roundStartTime) / 1000) -
+            COUNTDOWN_SECONDS,
+          rank,
+        );
 
-        if (isCorrect) {
-          const bonusPoints = this.getBonusPoint(
-            Math.floor((player.time - this.roundStartTime) / 1000) -
-              COUNTDOWN_SECONDS,
-            rank,
-          );
-
-          const addedScore = BASE_POINT + bonusPoints;
-          player.score += addedScore;
-          player.addedScore = addedScore;
-        }
+        const addedScore = BASE_POINT + bonusPoints;
+        player.score += addedScore;
+        player.addedScore = addedScore;
       });
   }
 

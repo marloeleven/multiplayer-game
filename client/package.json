@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://marloeleven.github.io/multiplayer-game",
   "scripts": {
-    "dev": "next dev --hostname 0.0.0.0",
+    "dev": "next dev --hostname 0.0.0.0 --port 3000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -19,6 +19,7 @@
     "better-react-mathjax": "^3.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "dotenv-cli": "^11.0.0",
     "lucide-react": "^0.292.0",
     "next": "^14.0.0",
     "radix-ui": "^1.4.3",

@@ -1,4 +1,5 @@
 'use client';
+import { cn } from '@/lib/utils';
 import { MathJax, MathJaxContext } from 'better-react-mathjax';
 
 const OPERATION_MAP = {
@@ -40,11 +41,17 @@ function ProblemDisplay({ question }: { question: string }) {
 
 interface QuestionDisplayProps {
   question: string;
+  className?: string;
 }
 
-export function QuestionDisplay({ question }: QuestionDisplayProps) {
+export function QuestionDisplay({ question, className }: QuestionDisplayProps) {
   return (
-    <div className="bg-linear-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-lg p-8 text-center">
+    <div
+      className={cn(
+        'bg-linear-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-lg p-8 text-center',
+        className,
+      )}
+    >
       <h2 className="text-gray-600 text-sm font-semibold mb-4 uppercase tracking-wide">
         Solve this problem
       </h2>

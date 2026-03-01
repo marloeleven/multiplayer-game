@@ -1,4 +1,4 @@
-import { HOSTNAME, PORT, PROTOCOL } from '@root/const/config';
+import { HOSTNAME_URL, WS_PORT, WS_PROTOCOL } from '@root/const/config';
 import { GAME_EVENT } from '@root/const/game';
 import type { EventMessage } from '@root/const/type';
 import { useSearchParams } from 'next/navigation';
@@ -21,11 +21,11 @@ export function useWebSocket() {
 
   const onJoin = useCallback((name: string) => {
     const ip = searchParams.get('ip');
-    const hostname = ip ?? HOSTNAME ?? window.location.hostname;
+    const hostname = ip ?? HOSTNAME_URL ?? window.location.hostname;
 
-    const port = process.env.NODE_ENV === 'production' ? '' : `:${PORT}`;
+    const port = process.env.NODE_ENV === 'production' ? '' : `:${WS_PORT}`;
 
-    const wsUrl = `${PROTOCOL}://${hostname}${port}`;
+    const wsUrl = `${WS_PROTOCOL}://${hostname}${port}`;
 
     ws.current = new WebSocket(wsUrl);
 

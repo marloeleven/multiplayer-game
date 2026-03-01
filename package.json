@@ -8,14 +8,14 @@
   },
   "scripts": {
     "dev": "concurrently \"bun run dev:server\" \"bun run dev:client\"",
-    "dev:server": "cd server && bun run dev",
-    "dev:client": "cd client && bun run dev",
+    "dev:server": "cd server && dotenv -e ../.env -- bun run dev",
+    "dev:client": "cd client && dotenv -e ../.env -- bun run dev",
     "deploy": "cd client && bun run deploy"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
-    "dotenv": "^17.3.1"
+    "dotenv-cli": "^11.0.0"
   }
 }

@@ -2,7 +2,7 @@ import express from 'express';
 import http from 'http';
 import { WebSocketServer } from 'ws';
 
-import { PORT } from '@root/const/config';
+import { WS_PORT } from '@root/const/config';
 import { GAME_EVENT } from '@root/const/game';
 import { MathGame } from './game/math';
 import { Player } from './player';
@@ -64,8 +64,8 @@ export class GameServer {
       );
     });
 
-    server.listen(PORT, () => {
-      console.log(`📡 WebSocket server ready on ws://0.0.0.0:${PORT}`);
+    server.listen(WS_PORT, () => {
+      console.log(`📡 WebSocket server ready on ws://0.0.0.0:${WS_PORT}`);
     });
   }
 }

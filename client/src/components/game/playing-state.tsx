@@ -3,9 +3,9 @@ import { autoFocus, cn, once } from '@/lib/utils';
 import { ANSWER_TIME_LIMIT, MAX_ANSWER } from '@root/const/config';
 import { FormEvent, useEffect, useRef } from 'react';
 import { useGame } from '../game-context';
-import QuestionDisplay from '../question-display';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
+import { QuestionDisplay } from './question-display';
 import { TimerProgressBar } from './timer-progress-bar';
 
 export function PlayingState() {

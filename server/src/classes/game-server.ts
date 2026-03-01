@@ -11,7 +11,7 @@ import { WSWebSocket } from './types';
 const app = express();
 app.use(express.json());
 const server = http.createServer(app);
-const wss = new WebSocketServer({ server, autoPong: true, port: PORT });
+const wss = new WebSocketServer({ server, autoPong: true });
 
 const GAMES = {
   MATH: 'math',

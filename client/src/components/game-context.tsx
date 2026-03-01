@@ -1,7 +1,7 @@
 'use client';
 
 import { useWebSocket } from '@/hooks/useWebSocket';
-import { soundManager } from '@/lib/sound';
+import { SOUND_TYPE, soundManager } from '@/lib/sound';
 import { GAME_EVENT } from '@root/const/game';
 import {
   createContext,
@@ -162,8 +162,8 @@ export function GameProvider({ children }: React.PropsWithChildren) {
       },
     );
 
-    // @ts-ignore
-    window.soundManager = soundManager;
+    soundManager.addAudio(SOUND_TYPE.COUNTDOWN, '/audio/countdown.wav');
+    soundManager.addAudio(SOUND_TYPE.WINNER, '/audio/crowd-cheer.wav');
 
     return () => {
       unsubscribeConnected();

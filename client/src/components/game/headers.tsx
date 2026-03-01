@@ -54,7 +54,8 @@ export function GameHeaders({
           })}
         >
           <p className="text-2xl font-bold">
-            Round {Math.max(state.roundNumber, 1)}/{ROUNDS_PER_GAME}
+            Round {Math.min(state.roundNumber, ROUNDS_PER_GAME)}/
+            {ROUNDS_PER_GAME}
           </p>
         </div>
       </div>

@@ -1,5 +1,6 @@
 export const SOUND_TYPE = {
   COUNTDOWN: 'countdown',
+  WINNER: 'winner',
 } as const;
 
 type SoundType = typeof SOUND_TYPE;
@@ -34,6 +35,12 @@ class SoundManager {
     }
   }
 
+  stopAudio(key: SoundTypeValues) {
+    const sound = this.sounds.get(key);
+
+    sound?.pause();
+  }
+
   on(
     key: SoundTypeValues,
     config: { durationMs?: number; startTime?: number },
@@ -45,8 +52,6 @@ class SoundManager {
 }
 
 const soundManager = new SoundManager();
-
-soundManager.addAudio(SOUND_TYPE.COUNTDOWN, '/audio/countdown.wav');
 
 export { soundManager };
 

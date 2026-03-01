@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
-import { useMemo } from 'react';
+import { SOUND_TYPE, soundManager } from '@/lib/sound';
+import { useEffect, useMemo } from 'react';
 import { useGame } from '../game-context';
 
 export function GameFinishState() {
@@ -9,6 +10,21 @@ export function GameFinishState() {
     () => Array.from(state.players.values()).sort((a, b) => b.score - a.score),
     [state.players],
   );
+
+  const winningPlayer = players.at(0);
+
+  const isCurrentPlayerWins =
+    state.currentPlayer.score && winningPlayer?.id === state.currentPlayer.id;
+
+  useEffect(() => {
+    if (isCurrentPlayerWins) {
+      soundManager.playAudio(SOUND_TYPE.WINNER);
+
+      return () => {
+        soundManager.stopAudio(SOUND_TYPE.WINNER);
+      };
+    }
+  }, [isCurrentPlayerWins]);
 
   return (
     <div className="space-y-6">

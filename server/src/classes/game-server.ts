@@ -1,6 +1,6 @@
 import express from 'express';
 import http from 'http';
-import { WebSocketServer } from 'ws';
+import { WebSocketServer, type ServerOptions } from 'ws';
 
 import { WS_PORT } from '@root/const/config';
 import { GAME_EVENT } from '@root/const/game';
@@ -11,7 +11,6 @@ import { WSWebSocket } from './types';
 const app = express();
 app.use(express.json());
 const server = http.createServer(app);
-const wss = new WebSocketServer({ server, autoPong: true });
 
 const GAMES = {
   MATH: 'math',
@@ -30,6 +29,14 @@ export class GameServer {
   }
 
   start() {
+    const config: ServerOptions = { server, autoPong: true };
+
+    if (process.env.NODE_ENV === 'production') {
+      config['port'] = WS_PORT;
+    }
+
+    const wss = new WebSocketServer(config);
+
     wss.on('connection', (ws) => {
       const player = new Player(ws);
       this.clients.set(player.id, player.ws);

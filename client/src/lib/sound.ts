@@ -42,15 +42,6 @@ class SoundManager {
 
     sound?.pause();
   }
-
-  on(
-    key: SoundTypeValues,
-    config: { durationMs?: number; startTime?: number },
-  ) {
-    const { startTime = 0, durationMs = 0 } = config;
-
-    this.playAudio(key, startTime, durationMs);
-  }
 }
 
 const soundManager = new SoundManager();

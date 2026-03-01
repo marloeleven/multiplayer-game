@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { GAME_STATUS, GameState, useGame } from '../game-context';
 
+import { SOUND_TYPE, soundManager } from '@/lib/sound';
 import { cn } from '@/lib/utils';
 import { COUNTDOWN_SECONDS, ROUNDS_PER_GAME } from '@root/const/config';
 
@@ -17,13 +18,16 @@ export function GameHeaders({
 
   useEffect(() => {
     if (status === GAME_STATUS.PLAYING) {
+      soundManager.playAudio(SOUND_TYPE.COUNTDOWN, 0, 900);
       const interval = setInterval(() => {
         setCountdown((prev) => {
           if (prev - 1 === 0) {
+            soundManager.playAudio(SOUND_TYPE.COUNTDOWN, 2, 900);
             clearInterval(interval);
             return 0;
           }
 
+          soundManager.playAudio(SOUND_TYPE.COUNTDOWN, 0, 900);
           return prev - 1;
         });
       }, 1000);

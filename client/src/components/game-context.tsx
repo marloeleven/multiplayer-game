@@ -1,6 +1,7 @@
 'use client';
 
 import { useWebSocket } from '@/hooks/useWebSocket';
+import { soundManager } from '@/lib/sound';
 import { GAME_EVENT } from '@root/const/game';
 import {
   createContext,
@@ -160,6 +161,9 @@ export function GameProvider({ children }: React.PropsWithChildren) {
         });
       },
     );
+
+    // @ts-ignore
+    window.soundManager = soundManager;
 
     return () => {
       unsubscribeConnected();

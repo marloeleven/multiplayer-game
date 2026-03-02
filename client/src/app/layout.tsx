@@ -1,5 +1,6 @@
 import { GameProvider } from '@/components/game-context';
 import { PWARegister } from '@/components/pwa-register';
+import { withPrefix } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Suspense } from 'react';
@@ -11,11 +12,11 @@ export const metadata: Metadata = {
   title: 'Math Fast - Multiplayer Math Game',
   description:
     'A fast-paced multiplayer math game where speed and accuracy matter',
-  manifest: '/site.webmanifest',
+  manifest: withPrefix('/manifest.json'),
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
+    icon: withPrefix('/favicon.ico'),
+    shortcut: withPrefix('/favicon-16x16.png'),
+    apple: withPrefix('/apple-touch-icon.png'),
   },
   viewport: {
     width: 'device-width',

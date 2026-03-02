@@ -1,3 +1,4 @@
+import { assetPrefix } from '@/const';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -30,4 +31,8 @@ export function autoFocus(el: HTMLInputElement) {
       el.focus();
     }
   });
+}
+
+export function withPrefix(url: string) {
+  return `${assetPrefix}${url}`;
 }

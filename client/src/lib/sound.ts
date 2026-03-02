@@ -1,6 +1,4 @@
-const isProd = process.env.NODE_ENV === 'production';
-
-const assetPrefix = isProd ? '/multiplayer-game' : '';
+import { withPrefix } from './utils';
 
 export const SOUND_TYPE = {
   COUNTDOWN: 'countdown',
@@ -14,7 +12,7 @@ class SoundManager {
   sounds = new Map<string, HTMLAudioElement>();
 
   addAudio(key: string, src: string) {
-    const sound = new Audio(`${assetPrefix}${src}`);
+    const sound = new Audio(withPrefix(src));
     sound.preload = 'auto';
 
     this.sounds.set(key, sound);

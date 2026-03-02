@@ -43,9 +43,9 @@ export default function RootLayout({
         <PWARegister />
         <Suspense fallback="Loading...">
           <GameProvider>
-            <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100">
+            <main className="w-full min-h-screen flex items-center justify-center lg:p-4 bg-linear-to-br from-blue-50 to-indigo-100">
               {children}
-            </div>
+            </main>
           </GameProvider>
         </Suspense>
       </body>

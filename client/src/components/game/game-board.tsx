@@ -20,8 +20,8 @@ export function GameBoard() {
   const isPlaying = state.status === GAME_STATUS.PLAYING;
 
   return (
-    <div className="w-full max-w-4xl">
-      <div className="bg-white rounded-lg shadow-xl overflow-hidden">
+    <div className="w-full lg:max-w-4xl h-dvh lg:h-auto @container">
+      <div className="bg-white lg:rounded-lg shadow-xl overflow-hidden h-full lg:h-auto">
         <Suspense fallback="Loading...">
           <FloatingDebugger>
             {JSON.stringify(
@@ -55,9 +55,7 @@ export function GameBoard() {
             </div>
 
             {/* Right: Players List */}
-            <div>
-              <PlayersList />
-            </div>
+            <PlayersList />
           </div>
         </div>
       </div>

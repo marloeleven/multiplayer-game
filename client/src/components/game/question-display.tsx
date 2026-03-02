@@ -6,7 +6,7 @@ const OPERATION_MAP = {
   '+': '+',
   '-': '-',
   '*': '\\times',
-  '/': '\\div',
+  '/': '\\longdiv',
 } as const;
 
 type Operation = keyof typeof OPERATION_MAP;
@@ -20,13 +20,16 @@ function ProblemDisplay({ question }: { question: string }) {
 
   const ope = OPERATION_MAP[operation];
 
-  const formula = `
-      \[ \begin{array}{r}
-          ${num1} \\
-        ${ope} ${num2} \\
-        \hline
-        \end{array} \]
-    `;
+  if (operation === '/') {
+    return (
+      <MathJax>{`
+          \\begin{array}{r}
+            ${num1} \\enclose{longdiv}{${num2}} \\\\
+            \\hline
+          \\end{array}
+        `}</MathJax>
+    );
+  }
 
   return (
     <MathJax>{`

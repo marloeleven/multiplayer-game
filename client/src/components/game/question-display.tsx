@@ -54,9 +54,11 @@ interface QuestionDisplayProps {
 export function QuestionDisplay({ question, className }: QuestionDisplayProps) {
   const onMount = (el: HTMLDivElementExtended) => {
     if (el) {
-      el.scrollIntoViewIfNeeded
-        ? el.scrollIntoViewIfNeeded()
-        : el.scrollIntoView();
+      setTimeout(() => {
+        el.scrollIntoViewIfNeeded
+          ? el.scrollIntoViewIfNeeded()
+          : el.scrollIntoView();
+      }, 500);
     }
   };
 

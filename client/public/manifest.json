@@ -3,7 +3,7 @@
   "short_name": "Math Fast",
   "description": "A fast-paced multiplayer math game where speed and accuracy matter",
   "start_url": "/multiplayer-game/",
-  "scope": "/",
+  "scope": "/multiplayer-game/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "theme_color": "#4f46e5",

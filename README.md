@@ -1,5 +1,7 @@
 # 🎮 Math Fast - Multiplayer Math Game
 
+**Play the game:** https://marloeleven.github.io/multiplayer-game/
+
 A fast-paced, interactive multiplayer math game where players compete against each other in real-time using WebSockets. Test your math skills and speed!
 
 ## 📋 Features
